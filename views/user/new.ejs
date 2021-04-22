@@ -1,0 +1,24 @@
+<% layout('layouts/boilerplate')%>
+  <h1>ini adalah form tambah karyawan</h1>
+  <form method="POST" action="/karyawan">
+    <div>
+      <label for="nama">Nama</label>
+      <input type="text" id="nama" name="karyawan[nama]">
+    </div>
+    <div>
+      <div>Jenis Kelamin:</div>
+      <input type="radio" id="small" name="karyawan[jkel]" value="Laki-laki">
+      <label for="small">Laki-laki</label>
+    </div>
+    <div>
+      <input type="radio" id="large" name="karyawan[jkel]" value="Perempuan">
+      <label for="large">Perempuan</label>
+    </div>
+    <div>
+      <label for="alamat">alamat</label>
+      <input type="text" id="alamat" name="karyawan[alamat]">
+    </div>
+    <button>Tambah!</button>
+  </form>
+
+  <a href="/karyawan">Semua Karyawan</a>

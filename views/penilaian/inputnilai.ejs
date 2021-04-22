@@ -1,0 +1,52 @@
+<% layout('layouts/boilerplate')%>
+  <div class="col-12 mt-3 mb-3 d-flex justify-content-between">
+    <h4 class="text-uppercase"><i class="fas fa-tasks mr-1"></i>Data Penilaian</h4>
+    <a href="/penilaian" class="btn btn-secondary"><i class="fas fa-arrow-left mr-1"></i>Kembali</a>
+  </div>
+
+  <div class="card mb-4 d-flex flex-column justify-content-center">
+    <div class="card-header">
+      <i class="fas fa-table mr-1"></i>
+      Input Nilai <strong>"<%= namakyw %>"</strong>
+    </div>
+    <form class="col-sm-12" method="POST" action="/penilaian/<%= idkaryawan %>/input">
+      <% for (var i=0; i < hasilArrr.length; i++) { %>
+        <div class="form-group row">
+          <label for="inputnama" class="col-sm-2 col-form-label">
+            <% if(hasilArrr[i][0].nama_kriteria === undefined) { %> 
+              <% continue %>  
+              <% }else{ %>
+                <%= hasilArrr[i][0].nama_kriteria %>
+                  <% } %> 
+          </label>
+          <div class="col-sm-10 input-group">
+            <select class="custom-select" name="nilai" id="sub" required>
+              <option value="" selected >--Pilih Nilai--</option>
+              <% for (var j=0; j < hasilArrr[i].length; j++) { %>
+
+                <% if( nkars.length > 0 && hasilArrr[i][j].id_subkriteria == nkars[i].id_subkriteria){ %> 
+
+                <option value="<%= hasilArrr[i][j].id_subkriteria %>" selected>
+                  <%= hasilArrr[i][j].nama_subkriteria %>
+                </option>
+              <% }else{ %>
+                <option value="<%= hasilArrr[i][j].id_subkriteria %>">
+                  <%= hasilArrr[i][j].nama_subkriteria %>
+                </option>
+                <% } %>  
+
+
+                <% } %>
+              </select>
+              <input type="hidden" name="idKriteria" value="<%= hasilArrr[i][0].id_kriteria %>">
+          </div>
+        </div>
+        <% } %>
+        <div class="form-group d-flex flex-row-reverse">
+          <button class="btn btn-success ml-1"><i class="fas fa-save mr-1"></i>Input Nilai</button>
+          <button class="btn btn-primary" type="reset" value="reset"><i class="fas fa-sync-alt mr-1"></i>Reset</button>
+        </div>
+    </form>
+
+  </div>
+  

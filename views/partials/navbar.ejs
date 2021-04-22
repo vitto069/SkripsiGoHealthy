@@ -1,0 +1,73 @@
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-success">
+  <a class="navbar-brand" href="/dashboard">Go Healthy</a>
+  <button class="btn btn-link btn-lg order-1 order-lg-0" id="sidebarToggle" href="#"><i
+      class="fas fa-bars"></i></button>
+
+  <ul class="navbar-nav ml-auto my-2 my-md-0">
+    <li class="nav-item dropdown">
+
+      <a class="nav-link dropdown-toggle d-flex align-items-center" id="userDropdown" href="#" role="button"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle fa-fw"></i><i
+          class="d-inline-block fas fa-caret-down"></i></a>
+
+      <div class="dropdown-menu dropdown-menu-right disabled" aria-labelledby="userDropdown">
+        <% if(!currentAdmin){ %>
+          <a class="dropdown-item" href="#">Anda belum login</a>
+          <a class="dropdown-item" href="/admin/login"><i class="fas fa-sign-in-alt mr-1"></i>Login</a>
+          <% }else{ %>
+            <a class="dropdown-item" href="#">Logged in as <%= currentAdmin %> </a>
+
+            <!-- <div class="dropdown-divider"></div> -->
+            <a class="dropdown-item" href="/admin/logout"><i class="mr-2 fas fa-sign-out-alt"></i>Logout</a>
+            <% } %>
+      </div>
+    </li>
+  </ul>
+</nav>
+<div id="layoutSidenav">
+  <div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+      <div class="sb-sidenav-menu">
+        <div class="nav mb-3">
+          <div class="sb-sidenav-menu-heading"></div>
+          <a class="nav-link" href="/dashboard">
+            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+            Dashboard
+          </a>
+          <div class="sb-sidenav-menu-heading">Master Data</div>
+          <a class="nav-link" href="/user" aria-expanded="false" aria-controls="collapseLayouts">
+            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+            Daftar User
+          </a>
+          <a class="nav-link" href="/kriteria" aria-expanded="false" aria-controls="collapseLayouts">
+            <div class="sb-nav-link-icon"><i class="fas fa-cube"></i></div>
+            <i class="fas fa-plus mr-1"></i> Kolestrol
+          </a>
+          <a class="nav-link" href="/konsultasi" aria-expanded="false" aria-controls="collapseLayouts">
+            <div class="sb-nav-link-icon"><i class="fas fa-cubes"></i></div>
+            <i class="fas fa-plus mr-1"></i> Asam Urat
+          </a>
+          <a class="nav-link" href="/penilaian" aria-expanded="false" aria-controls="collapseLayouts">
+            <div class="sb-nav-link-icon"><i class="fas fa-list-ul"></i></div>
+            <i class="fas fa-plus mr-1"></i> Gula Darah
+          </a>
+          <a class="nav-link" href="/hasil" aria-expanded="false" aria-controls="collapseLayouts">
+            <div class="sb-nav-link-icon"><i class="fas fa-poll"></i></div>
+            <i class="fas fa-plus mr-1"></i> Olah Raga
+          </a>
+
+          <div class="sb-sidenav-menu-heading">Admin</div>
+          <a class="nav-link" href="/admin">
+            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+            Data Admin
+          </a>
+
+        </div>
+      </div>
+      <!-- <div class="sb-sidenav-footer">
+        <div class="small">Logged in as:</div>
+        Start Bootstrap
+      </div> -->
+    </nav>
+  </div>
+  <div id="layoutSidenav_content">

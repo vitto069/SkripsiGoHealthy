@@ -1,0 +1,125 @@
+<% layout('layouts/boilerplate')%>
+  
+  <div class="col-12 mt-3 mb-3 d-flex justify-content-between">
+    <h4 class="text-uppercase"><i class="fas fa-users mr-1"></i>Data User</h4>
+    <!-- <a href="/karyawan/new" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-primary"><i
+        class="fas fa-plus mr-1"></i>Tambah User</a> -->
+
+
+    <!-- Modal Tambah data -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-plus mr-1"></i>Tambah Data</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- form tambah User -->
+            <form method="POST" action="/user">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Nama</label>
+                <input type="text" name="user[nama]" class="form-control" id="recipient-name" required>
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Username</label>
+                <input type="text" name="user[username]" class="form-control" id="recipient-name" required>
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Password</label>
+                <input type="text" name="user[password]" class="form-control" id="recipient-name" required>
+              </div>
+              <div class="form-group">
+                <label for="recipient-tgl" class="col-form-label">Tanggal Lahir</label>
+                <input type="date" name="user[tgl_lahir]" class="form-control" id="recipient-tgl" required>
+              </div>
+              <div class="form-group">
+                <!-- <label for="recipient-npwp" class="col-form-label">Golongan Darah</label> -->
+                <!-- <input type="text" name="user[goldarah]" class="form-control" id="recipient-npwp" required> -->
+                <select class="custom-select" name="user[goldarah]" id="sub" required>
+                  <option value="" selected >--Gol Darah--</option>
+                  <option value="A">A</option>
+                  <option value="AB">AB</option>
+                  <option value="B">B</option>
+                  <option value="O">O</option>
+                </select>
+              </div>
+              
+          
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-primary" type="reset" value="reset"><i
+                class="fas fa-sync-alt mr-1"></i>Reset</button>
+            <button class="btn btn-success"><i class="fas fa-save mr-1"></i>Simpan</button>
+          </div>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="card mb-4">
+    <div class="card-header">
+      <i class="fas fa-table mr-1"></i>
+      Daftar Data Karyawan
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-sm table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
+          <thead class="table-info">
+            <tr>
+              <th class="p-3">No.</th>
+              <th class="p-2">Nama</th>
+              <th class="p-2">username</th>
+              <th class="p-2">password</th>
+              <th class="p-2">tgllahir</th>
+              <th class="p-2">Gol Darah</th>
+              <th class="p-2">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% let nomor=1; for(let user of users){ %>
+              <% let current_datetime=user.tgl_lahir%>
+                <% let formatted_date=(current_datetime.getDate() - 1) + "-" + (current_datetime.getMonth()+1) + "-" +
+                  (current_datetime.getFullYear() )%>
+                  <tr class="table-active">
+                    <td class="p-2">
+                      <%= nomor++ %>
+                    </td>
+                    <td class="p-2">
+                      <%= user.nama_user %>
+                    </td>
+                    <td class="p-2">
+                      <%= user.username %>
+                    </td>
+                    <td class="p-2">
+                      <%= user.password %>
+                    </td>
+                    <td class="p-2">
+                      <%= formatted_date %>
+                    </td>
+                    <td class="p-2">
+                      <%= user.gol_darah %>
+                    </td>
+                    <td class="d-flex p-3 justify-content-center">
+                      <a class="btn btn-warning mr-1" href="/user/<%= user.id %>/edit"><i
+                          class="fas fa-edit"></i></a>
+                      <form method="POST" action="/user/<%= user.id %>?_method=DELETE">
+                        <button class="btn btn-danger"
+                          onclick="return confirm('Apakah yakin ingin menghapus data ini?')"><i
+                            class="fas fa-trash-alt"></i></button>
+                      </form>
+                    </td>
+                  </tr>
+                  <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

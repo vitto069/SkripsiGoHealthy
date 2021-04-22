@@ -1,0 +1,58 @@
+<% layout('layouts/boilerplate')%>
+
+
+
+  <div class="col-12 mt-3 mb-3 d-flex justify-content-between">
+    <h4 class="text-uppercase"><i class="fas fa-chart-area mr-1"></i>Data Hasil Penilaian</h4>
+    <!-- <button class="btn btn-danger" id="download"><i class="fas fa-print mr-1"></i>Cetak Laporan</button> -->
+    <!-- <% // if(currentUser){ %>
+      <a class="btn btn-danger" href="/cetak"><i class="fas fa-print mr-1"></i>Cetak Laporan</a>
+    <% //} %>  -->
+  </div>
+
+  
+  <div class="card mb-4">
+    <div class="card-header">
+      <i class="fas fa-table mr-1"></i>
+      Data Hasil Perankingan
+    </div>
+    <div class="card-body">
+      <div class="table-responsive" id="invoice">
+        <table class="table table-sm table-bordered text-center" id="invoice" width="100%" cellspacing="0">
+          <thead class="table-info">
+            <tr>
+              <th class="p-3">Rangking</th>
+              <th class="p-3">NIK</th>
+              <th class="p-3">Nama Karyawan</th>
+              <th class="p-3">Nilai Evaluasi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if(skors.length > 0){ %> 
+            <% let nomor=1; for(let skor of skors){ %>
+              <tr class="table-active">
+                <td class="p-2">
+                  <%= nomor++ %>
+                </td>
+                    <td class="p-2">
+                      <%= skor.ktp %>
+                    </td>
+                    <td class="p-2">
+                      <%= skor.nama %>
+                    </td>
+                    <td class="p-2">
+                      <%= skor.bobot_subkriteria %>
+                    </td>
+                  </tr>
+                  <%} %>
+
+                  <% }else{ %>
+                    <tr>
+                      <td colspan="4" class="text-warning">*Belum ada hasil penilaian</td>
+                    </tr>
+                <% } %> 
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

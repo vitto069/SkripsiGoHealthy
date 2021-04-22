@@ -1,0 +1,92 @@
+<% layout('layouts/boilerplate')%>
+  <div class="col-12 mt-3 mb-3 d-flex justify-content-between">
+    <h4 class="text-uppercase"><i class="fas fa-clipboard-list mr-1"></i>Data Penilaian</h4>
+
+    <!-- Modal Tambah data -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-plus mr-1"></i>Tambah Data</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- form tambah karyawan -->
+            <form method="POST" action="/karyawan">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Nama</label>
+                <input type="text" name="karyawan[nama]" class="form-control" id="recipient-name" required>
+              </div>
+              <div class="form-group">
+                <label for="recipient-tgl" class="col-form-label">Tanggal Lahir</label>
+                <input type="date" name="karyawan[tgllahir]" class="form-control" id="recipient-tgl" required>
+              </div>
+              <div class="form-group">
+                <label for="recipient-npwp" class="col-form-label">KTP</label>
+                <input type="text" name="karyawan[ktp]" class="form-control" id="recipient-npwp">
+              </div>
+              <div class="form-group">
+                <label for="recipient-ktp" class="col-form-label">NPWP</label>
+                <input type="text" name="karyawan[npwp]" class="form-control" id="recipient-ktp">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-primary" type="reset" value="reset"><i
+                class="fas fa-sync-alt mr-1"></i>Reset</button>
+            <button class="btn btn-success"><i class="fas fa-plus mr-1"></i>Tambah Karyawan</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="card mb-4">
+    <div class="card-header">
+      <i class="fas fa-table mr-1"></i>
+      Daftar Data penilaian
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-sm table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
+          <thead class="table-info">
+            <tr>
+              <th class="p-3">No.</th>
+              <th class="p-2">NIK</th>
+              <th class="p-2">Nama karyawan</th>
+              <th class="p-2">Aksi</th>
+              <!-- <th class="p-2">Keterangan</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <% let nomor=1; for(let karyawan of karyawans){ %>
+              <tr class="table-active">
+                <td class="p-2">
+                  <%= nomor++ %>
+                </td>
+                <td class="p-2">
+                  <%= karyawan.ktp %>
+                </td>
+                <td class="p-2">
+                  <%= karyawan.nama %>
+                </td>
+                <td class="d-flex p-3 justify-content-center">
+                  <a class="btn btn-success mr-1"
+                    href="/penilaian/<%= karyawan.id_karyawan %>/<%= karyawan.nama %>/input"><i
+                      class="fas fa-plus mr-1"></i>Input Nilai</a>
+                </td>
+                <!-- <td class="p-2">
+                  belum dinilai/sudah dinilai
+                </td> -->
+              </tr>
+              <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
